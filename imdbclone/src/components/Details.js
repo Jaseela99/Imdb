@@ -77,6 +77,7 @@ const ImageTitle = styled.div`
   width: 35vh;
   min-height: 170px;
   min-width: 200px;
+  margin-top:20px;
   img {
     width: 100%;
     height: 100%;
@@ -110,7 +111,7 @@ const PlayButton = styled.button`
 const TrailerButton = styled(PlayButton)`
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgb (249, 249, 249);
-  color: rgb (249, 249, 249);
+  color: rgb(2249,249,249 );
 `;
 const AddButton = styled.button`
   width: 44px;
