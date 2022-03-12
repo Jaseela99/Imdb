@@ -120,6 +120,7 @@ const AddButton = styled.button`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  margin-right:20px;
   background: rgba(0, 0, 0, 0.6);
   cursor: pointer;
   span {
