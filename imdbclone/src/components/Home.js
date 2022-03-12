@@ -4,6 +4,7 @@ import ImageSlider from "./ImageSlider";
 import Veiwers from "./Veiwers";
 import Movies from "./Movies"
 
+
 function Home() {
   return (
     <Container>
