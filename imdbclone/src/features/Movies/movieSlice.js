@@ -1,4 +1,4 @@
-import {createSlice} from "@redux.js/toolkit"
+import {createSlice} from "@reduxjs/toolkit"
 
 const initialState ={
     movies:[]
@@ -18,7 +18,6 @@ const movieSlice = createSlice ({
 })
 
 export const {setMovies} = movieSlice.actions;
-
-const selectMovies = (state) => state.movie.movies;
+export const selectMovies = (state) => state.movie.movies;
 
 export default movieSlice.reducer;
