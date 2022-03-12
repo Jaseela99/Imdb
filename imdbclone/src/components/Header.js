@@ -21,7 +21,7 @@ function Header() {
           <span>MOVIES</span>
         </a>
         <a>
-          <img src="/images/movie-icon.svg" />
+          <img src="/images/series-icon.svg" />
           <span>SERIES</span>
         </a>
         <a>
