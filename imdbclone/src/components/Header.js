@@ -9,6 +9,7 @@ import {
 } from "../features/User/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Header() {
   const dispatch = useDispatch();
@@ -48,26 +49,26 @@ function Header() {
     auth.signOut().then(() => {
       dispatch(setSignOut);
       history("/login");
-      window.location.reload()
+      window.location.reload();
     });
   };
+
   return (
     //added imdb logo and icons
     <Nav>
       <Logo src="https://eyeinkfx.com/wp-content/uploads/2019/10/ICON-imdb.png" />
       {!userName ? (
         <LoginConatiner>
-          <Login onClick={signIn}>LOGIN</Login>
+          <Login>LOGIN</Login>
         </LoginConatiner>
       ) : (
         <>
           <NavMenu>
             <a>
               <img src="/images/home-icon.svg" />
-              <Link to="/" style={{ textDecoration: 'none' }} >
+              <Link to="/" style={{ textDecoration: "none" }}>
                 <span>HOME</span>
-                </Link>
-                
+              </Link>
             </a>
 
             <a>
@@ -109,10 +110,10 @@ const Nav = styled.nav`
   background: #0d1a26;
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   padding: 0 35px;
   overflow-x: hidden;
-  z-index:3;
+  z-index: 3;
 `;
 const Logo = styled.img`
   width: 80px;
@@ -128,18 +129,17 @@ const NavMenu = styled.div`
     align-items: center;
     padding: 0 12px;
     cursor: pointer;
-    
+
     img {
       align-items: center;
       height: 20px;
-      color:white;
+      color: white;
     }
     span {
       font-size: 13px;
       letter-spacing: 1.42px;
       position: relative;
-      color:white;
-      
+      color: white;
 
       //inserts something after the content of each selected element
       &:after {

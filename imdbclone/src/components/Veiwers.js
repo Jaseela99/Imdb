@@ -33,7 +33,7 @@ const Container = styled.div`
   grid-template-columns: repeat(5, minmax(0, 1fr));
 `;
 const Wrap = styled.div`
-  cursor:pointer;
+  cursor: pointer;
   border-radius: 10px;
   border: 3px solid rgba(249, 249, 249, 0.1);
   box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
@@ -46,7 +46,6 @@ const Wrap = styled.div`
     object-fit: cover;
 
     //& is used for concatination
-
   }
   &:hover {
     box-shadow: rgb(0 0 0 / 80%) 0px 40px 58px -16px,

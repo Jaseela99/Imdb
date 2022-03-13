@@ -7,7 +7,7 @@ function Detail() {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
   const URL = "https://image.tmdb.org/t/p/w300";
-  console.log(id)
+  console.log(id);
 
   useEffect(() => {
     //grab movie info
@@ -56,6 +56,8 @@ function Detail() {
 
           <SubTitle>{movie.original_title}</SubTitle>
 
+          {/*           <Genre>{movie.genres}</Genre> */}
+
           <Description>{movie.overview}</Description>
         </>
       )}
@@ -90,6 +92,7 @@ const ImageTitle = styled.div`
   min-height: 170px;
   min-width: 200px;
   margin-top: 20px;
+  margin-bottom: 20px;
   img {
     width: 100%;
     height: 100%;
@@ -156,3 +159,5 @@ const Description = styled.div`
   color: rgb(249, 249, 249);
   max-width: 760px;
 `;
+
+const Genre = styled(Description);
