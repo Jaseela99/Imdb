@@ -1,13 +1,64 @@
-import React from "react";
+import React,{useEffect} from "react";
 import styled from "styled-components";
+import {auth,provider} from "../firebase"
+import {selectUserName,selectUserPhoto,setUserLogin,setSignOut} from "../features/User/userSlice"
+import {useDispatch, useSelector } from "react-redux"
+import {useNavigate} from "react-router-dom"
+
+
 
 function Header() {
+  const dispatch = useDispatch()
+  const history =useNavigate()
+  const userName = useSelector(selectUserName);
+  const userPhoto = useSelector(selectUserPhoto);
+
+useEffect(()=>{
+auth.onAuthStateChanged(async (user)=>{
+  if (user){
+    dispatch(setUserLogin({
+      name:user.displayName,
+      email:user.email,
+      photo:user.photoURL
+      }))
+      history("/")
+
+  }
+
+})
+},[])
+
+  const signIn =()=>{
+  auth.signInWithPopup(provider)
+  .then((result)=>{
+    let user = result.user
+dispatch(setUserLogin({
+name:user.displayName,
+email:user.email,
+photo:user.photoURL
+}))
+history("/")
+})
+  }
+
+  const signOut =()=>{
+    auth.signOut()
+    .then(()=>{
+      dispatch(setSignOut)
+      history("/login")
+    })
+  }
   return (
     //added imdb logo and icons
     <Nav>
       <Logo src="https://eyeinkfx.com/wp-content/uploads/2019/10/ICON-imdb.png" />
-
-      <NavMenu>
+{
+  !userName ? 
+  <LoginConatiner>
+    <Login onClick={signIn}>LOGIN</Login>
+  </LoginConatiner>:
+  <>
+  <NavMenu>
         <a>
           <img src="/images/home-icon.svg" />
           <span>HOME</span>
@@ -32,7 +83,11 @@ function Header() {
 
       {/* added userimage */}
 
-      <UserImage src="https://www.disneyplusinformer.com/wp-content/uploads/2021/12/Encanto-Avatar.png" />
+      <UserImage onClick={signOut} src="https://www.disneyplusinformer.com/wp-content/uploads/2021/12/Encanto-Avatar.png" />
+  
+  </>
+}
+      
     </Nav>
   );
 }
@@ -103,3 +158,25 @@ const UserImage = styled.img`
   border-radius: 50%;
   cursor: pointer;
 `;
+
+ 
+const Login = styled.div`
+
+border: 1px solid #f9f9f9;
+padding:8px 16px;
+border-radius :4px;
+letter-spacing: 1.5px;
+transitio  :all 0.2w ease 0s;
+&:hover{
+  background: rgb(198, 198, 198);
+  
+  color:#000;
+  border-color:transparent;
+}
+
+`
+const LoginConatiner = styled.div`
+flex:1;
+display:flex;
+justify-content:flex-end;
+`
