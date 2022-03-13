@@ -23,11 +23,12 @@ dispatch(setMovies(tempMovies))
 },[])
 
 
-  return <Container>
+  return (
+  <Container>
     <ImageSlider/>
     <Veiwers/>
     <Movies/>
-  </Container>
+  </Container>)
 }
 
 export default Home;

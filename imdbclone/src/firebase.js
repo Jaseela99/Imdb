@@ -1,24 +1,23 @@
 import firebase from "firebase";
 
-//access to database
 const firebaseConfig = {
-  apiKey: "AIzaSyA9BnlX96fMf7XiUVCFRsoQzG8DGERJkeY",
-  authDomain: "disneyplus-clone-a33d5.firebaseapp.com",
-  projectId: "disneyplus-clone-a33d5",
-  storageBucket: "disneyplus-clone-a33d5.appspot.com",
-  messagingSenderId: "37918794208",
-  appId: "1:37918794208:web:dbe9842dfe1dda522a4b85",
-  measurementId: "G-DRVLJKWRWG",
+  apiKey: "AIzaSyCSBKZhBeCd75ak_3KIj7S47uzdXKys-ic",
+  authDomain: "disney-clone-8e959.firebaseapp.com",
+  projectId: "disney-clone-8e959",
+  storageBucket: "disney-clone-8e959.appspot.com",
+  messagingSenderId: "266328930301",
+  appId: "1:266328930301:web:0120361e195ab8f23f8b94",
+  measurementId: "G-VFJQPRL7VB"
 };
-
 //initialzing firebase app
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 //database
 const db = firebaseApp.firestore();
 //authentication for login and logout
-const auth = firebase.auth();
+export const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
-const storage = firebase.storage();
+provider.setCustomParameters({ prompt: 'select_account' })
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const storage = firebase.storage();
 
-export { auth, provider, storage };
 export default db;

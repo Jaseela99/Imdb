@@ -17,8 +17,6 @@ function Detail() {
         if (doc.exists) {
           //save the movie data
           setMovie(doc.data());
-        } else {
-          //redirect to home page
         }
       });
   }, []);
