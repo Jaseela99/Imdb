@@ -1,20 +1,34 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 import styled from "styled-components";
-import { selectMovies } from "../features/Movies/movieSlice";
+import { Link } from "react-router-dom";
 
 function Movies() {
-  const movies = useSelector(selectMovies);
+  const [movies, setMovies] = useState([]);
+  const URL = "https://image.tmdb.org/t/p/w300";
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.themoviedb.org/3/trending/all/day?api_key=efba52d6b226548f6646bdb8a19df4e5"
+      )
+      .then((data) => {
+        setMovies(data.data.results);
+      });
+  });
   return (
     <Container>
       <h4>Recommended</h4>
       <Content>
         {movies &&
-          movies.map((movie) => {
+          movies.map((movie) => (
             <Wrap key={movie.id}>
-              <img src={movie.cardImg} alt="" />
-            </Wrap>;
-          })}
+              <Link to={`/detail/${movie.id}`}>
+                <img src={`${URL}/${movie.poster_path}`} alt={movie.title} />
+              </Link>
+            </Wrap>
+          ))}
       </Content>
     </Container>
   );

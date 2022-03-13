@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { auth, signInWithGoogle } from "../firebase";
 import {
   selectUserName,
-  selectUserPhoto,
   setUserLogin,
   setSignOut,
 } from "../features/User/userSlice";
@@ -14,7 +14,6 @@ function Header() {
   const dispatch = useDispatch();
   const history = useNavigate();
   const userName = useSelector(selectUserName);
-  const userPhoto = useSelector(selectUserPhoto);
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
@@ -49,6 +48,7 @@ function Header() {
     auth.signOut().then(() => {
       dispatch(setSignOut);
       history("/login");
+      window.location.reload()
     });
   };
   return (
@@ -64,7 +64,10 @@ function Header() {
           <NavMenu>
             <a>
               <img src="/images/home-icon.svg" />
-              <span>HOME</span>
+              <Link to="/" style={{ textDecoration: 'none' }} >
+                <span>HOME</span>
+                </Link>
+                
             </a>
 
             <a>
@@ -106,8 +109,10 @@ const Nav = styled.nav`
   background: #0d1a26;
   display: flex;
   align-items: center;
+  justify-content:center;
   padding: 0 35px;
   overflow-x: hidden;
+  z-index:3;
 `;
 const Logo = styled.img`
   width: 80px;
@@ -123,14 +128,18 @@ const NavMenu = styled.div`
     align-items: center;
     padding: 0 12px;
     cursor: pointer;
+    
     img {
       align-items: center;
       height: 20px;
+      color:white;
     }
     span {
       font-size: 13px;
       letter-spacing: 1.42px;
       position: relative;
+      color:white;
+      
 
       //inserts something after the content of each selected element
       &:after {

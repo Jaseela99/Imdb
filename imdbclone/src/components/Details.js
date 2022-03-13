@@ -1,63 +1,62 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import db from "../firebase";
 
 function Detail() {
   const { id } = useParams();
-  const [movie, setMovie] = useState();
+  const [movie, setMovie] = useState({});
+  const URL = "https://image.tmdb.org/t/p/w300";
+  console.log(id)
 
   useEffect(() => {
     //grab movie info
-
-    db.collection("movies")
-      .doc(id)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          //save the movie data
-          setMovie(doc.data());
-        }
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${id}?api_key=efba52d6b226548f6646bdb8a19df4e5`
+      )
+      .then((data) => {
+        setMovie(data.data);
+        console.log(data.data);
       });
-  }, []);
+  }, [id]);
   return (
     <Container>
       {/*  image */}
       {movie && (
         <>
-        
-        <Background>
-          <img src={movie.background.Img} alt="" />
-        </Background>
-  
-        <ImageTitle>
-          <img src={movie.titleImg} alt="" />
-        </ImageTitle>
-  
-        <Controls>
-          {/* buttons */}
-          <PlayButton>
-            <img src="/images/play-icon-black.png" alt="" />
-            <span>PLAY</span>
-          </PlayButton>
-  
-          <TrailerButton>
-            <img src="/images/play-icon-white.png" alt="" />
-            <span>TRAILER</span>
-          </TrailerButton>
-  
-          <AddButton>
-            <span>+</span>
-          </AddButton>
-  
-          <GroupWatchButton>
-            <img src="/images/group-icon.png" alt="" />
-          </GroupWatchButton>
-        </Controls>
-  
-        <SubTitle>{movie.subTitle}</SubTitle>
-  
-        <Description>{movie.description}</Description>
+          <Background>
+            <img src={`${URL}/${movie.backdrop_path}`} alt={movie.title} />
+          </Background>
+
+          <ImageTitle>
+            <img src={`${URL}/${movie.poster_path}`} alt={movie.subTitle} />
+          </ImageTitle>
+
+          <Controls>
+            {/* buttons */}
+            <PlayButton>
+              <img src="/images/play-icon-black.png" alt="" />
+              <span>PLAY</span>
+            </PlayButton>
+
+            <TrailerButton>
+              <img src="/images/play-icon-white.png" alt="" />
+              <span>TRAILER</span>
+            </TrailerButton>
+
+            <AddButton>
+              <span>+</span>
+            </AddButton>
+
+            <GroupWatchButton>
+              <img src="/images/group-icon.png" alt="" />
+            </GroupWatchButton>
+          </Controls>
+
+          <SubTitle>{movie.original_title}</SubTitle>
+
+          <Description>{movie.overview}</Description>
         </>
       )}
     </Container>
