@@ -1,52 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import db from "../firebase";
 
 function Detail() {
+  const { id } = useParams();
+  const [movie, setMovie] = useState();
+
+  useEffect(() => {
+    //grab movie info
+
+    db.collection("movies")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          //save the movie data
+          setMovie(doc.data());
+        } else {
+          //redirect to home page
+        }
+      });
+  }, []);
   return (
     <Container>
       {/*  image */}
-      <Background>
-        <img
-          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4F39B7E16726ECF419DD7C49E011DD95099AA20A962B0B10AA1881A70661CE45/scale?width=1440&aspectRatio=1.78&format=jpeg"
-          alt=""
-        />
-      </Background>
-
-      <ImageTitle>
-        <img
-          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/D7AEE1F05D10FC37C873176AAA26F777FC1B71E7A6563F36C6B1B497CAB1CEC2/scale?width=1440&aspectRatio=1.78"
-          alt=""
-        />
-      </ImageTitle>
-
-      <Controls>
-        {/* buttons */}
-        <PlayButton>
-          <img src="/images/play-icon-black.png" alt="" />
-          <span>PLAY</span>
-        </PlayButton>
-
-        <TrailerButton>
-          <img src="/images/play-icon-white.png" alt="" />
-          <span>TRAILER</span>
-        </TrailerButton>
-
-        <AddButton>
-          <span>+</span>
-        </AddButton>
-
-        <GroupWatchButton>
-          <img src="/images/group-icon.png" alt="" />
-        </GroupWatchButton>
-      </Controls>
-
-      <SubTitle>2018 • 7m • Family, Fantasy, Kids, Animation</SubTitle>
-
-      <Description>
-        A Chinese mom who’s sad when her grown son leaves home gets another
-        chance at motherhood when one of her dumplings springs to life. But she
-        finds that nothing stays cute and small forever.
-      </Description>
+      {movie && (
+        <>
+        
+        <Background>
+          <img src={movie.background.Img} alt="" />
+        </Background>
+  
+        <ImageTitle>
+          <img src={movie.titleImg} alt="" />
+        </ImageTitle>
+  
+        <Controls>
+          {/* buttons */}
+          <PlayButton>
+            <img src="/images/play-icon-black.png" alt="" />
+            <span>PLAY</span>
+          </PlayButton>
+  
+          <TrailerButton>
+            <img src="/images/play-icon-white.png" alt="" />
+            <span>TRAILER</span>
+          </TrailerButton>
+  
+          <AddButton>
+            <span>+</span>
+          </AddButton>
+  
+          <GroupWatchButton>
+            <img src="/images/group-icon.png" alt="" />
+          </GroupWatchButton>
+        </Controls>
+  
+        <SubTitle>{movie.subTitle}</SubTitle>
+  
+        <Description>{movie.description}</Description>
+        </>
+      )}
     </Container>
   );
 }
@@ -77,7 +92,7 @@ const ImageTitle = styled.div`
   width: 35vh;
   min-height: 170px;
   min-width: 200px;
-  margin-top:20px;
+  margin-top: 20px;
   img {
     width: 100%;
     height: 100%;
@@ -111,7 +126,7 @@ const PlayButton = styled.button`
 const TrailerButton = styled(PlayButton)`
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgb (249, 249, 249);
-  color: rgb(2249,249,249 );
+  color: rgb(2249, 249, 249);
 `;
 const AddButton = styled.button`
   width: 44px;
@@ -120,7 +135,7 @@ const AddButton = styled.button`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  margin-right:20px;
+  margin-right: 20px;
   background: rgba(0, 0, 0, 0.6);
   cursor: pointer;
   span {
