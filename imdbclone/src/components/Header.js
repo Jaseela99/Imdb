@@ -9,7 +9,7 @@ import {
 } from "../features/User/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 
 function Header() {
   const dispatch = useDispatch();
@@ -59,7 +59,7 @@ function Header() {
       <Logo src="https://eyeinkfx.com/wp-content/uploads/2019/10/ICON-imdb.png" />
       {!userName ? (
         <LoginConatiner>
-          <Login>LOGIN</Login>
+          <Login onClick={signIn}>LOGIN</Login>
         </LoginConatiner>
       ) : (
         <>
