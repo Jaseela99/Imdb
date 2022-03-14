@@ -56,8 +56,6 @@ function Detail() {
 
           <SubTitle>{movie.original_title}</SubTitle>
 
-          {/*           <Genre>{movie.genres}</Genre> */}
-
           <Description>{movie.overview}</Description>
         </>
       )}
@@ -160,4 +158,4 @@ const Description = styled.div`
   max-width: 760px;
 `;
 
-const Genre = styled(Description);
+
