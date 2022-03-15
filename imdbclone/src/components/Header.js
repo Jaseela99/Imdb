@@ -16,6 +16,7 @@ function Header() {
   const history = useNavigate();
   const userName = useSelector(selectUserName);
 
+//displays the user details on loading the page if user is present
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
@@ -31,6 +32,7 @@ function Header() {
     });
   }, []);
 
+  //sign in =>google and sets the userdetails
   const signIn = () => {
     signInWithGoogle().then((result) => {
       let user = result.user;
@@ -44,7 +46,7 @@ function Header() {
       history("/");
     });
   };
-
+//if sign out the user details is set to null and navigates to login page
   const signOut = () => {
     auth.signOut().then(() => {
       dispatch(setSignOut);
@@ -55,8 +57,11 @@ function Header() {
 
   return (
     //added imdb logo and icons
+    //if not user login is displayed else the icons
     <Nav>
       <Logo src="https://eyeinkfx.com/wp-content/uploads/2019/10/ICON-imdb.png" />
+     
+     
       {!userName ? (
         <LoginConatiner>
           <Login onClick={signIn}>LOGIN</Login>

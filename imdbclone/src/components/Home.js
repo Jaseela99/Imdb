@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ImageSlider from "./ImageSlider";
 import Movies from "./Movies";
 import Veiwers from "./Veiwers";
-
+//components from the home page
 function Home() {
   return (
     <Container>

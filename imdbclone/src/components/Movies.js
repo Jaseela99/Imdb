@@ -5,10 +5,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 function Movies() {
+  //sets the initial state
   const [movies, setMovies] = useState([]);
   const URL = "https://image.tmdb.org/t/p/w300";
 
   useEffect(() => {
+    //fetching api with axios
     axios
       .get(
         "https://api.themoviedb.org/3/trending/all/day?api_key=efba52d6b226548f6646bdb8a19df4e5"
@@ -21,9 +23,13 @@ function Movies() {
     <Container>
       <h4>Recommended</h4>
       <Content>
-        {movies &&
+        {//maps the movie details if movies are present
+        movies &&
           movies.map((movie) => (
             <Wrap key={movie.id}>
+
+              {/* when any movie is clicked it returns to details page */}
+              
               <Link to={`/detail/${movie.id}`}>
                 <img src={`${URL}/${movie.poster_path}`} alt={movie.title} />
               </Link>

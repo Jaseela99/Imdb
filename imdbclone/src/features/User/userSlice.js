@@ -1,12 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit"
 
-
+//createslice accepts an initial state, an object of reducer functions, and a "slice name"
 const initialState={
     name:"",
     email:"",
     photo:""
 }
-
+//updates login info
 const userSlice = createSlice({
     name:"user",
     initialState,
@@ -17,6 +17,7 @@ const userSlice = createSlice({
             state.photo=action.payload.photo
 
         },
+        //clears when signout
         setSignOut:(state) =>{
            state.name=null; 
            state.email=null; 

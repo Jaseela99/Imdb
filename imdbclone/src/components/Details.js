@@ -55,7 +55,7 @@ function Detail() {
           </Controls>
 
           <SubTitle>{movie.original_title}</SubTitle>
-
+          
           <Description>{movie.overview}</Description>
         </>
       )}
@@ -150,6 +150,7 @@ const SubTitle = styled.div`
   min-height: 20px;
   margin-top: 26px;
 `;
+
 const Description = styled.div`
   line-height: 1.4;
   font-size: 20px;
