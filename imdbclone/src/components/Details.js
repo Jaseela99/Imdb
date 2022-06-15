@@ -7,10 +7,10 @@ function Detail() {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
   const URL = "https://image.tmdb.org/t/p/w300";
-  console.log(id);
+ // console.log(id);
 
   useEffect(() => {
-    //grab movie info
+    //grab movie info 
     axios
       .get(
         `https://api.themoviedb.org/3/movie/${id}?api_key=efba52d6b226548f6646bdb8a19df4e5`
@@ -26,11 +26,11 @@ function Detail() {
       {movie && (
         <>
           <Background>
-            <img src={`${URL}/${movie.backdrop_path}`} alt={movie.title} />
+            <img src={`${URL}/${movie.backdrop_path}`} alt={movie.backdrop_path} />
           </Background>
 
           <ImageTitle>
-            <img src={`${URL}/${movie.poster_path}`} alt={movie.subTitle} />
+            <img src={`${URL}/${movie.poster_path}`} alt={movie.poster_path} />
           </ImageTitle>
 
           <Controls>
@@ -146,7 +146,7 @@ const GroupWatchButton = styled(AddButton)`
 `;
 const SubTitle = styled.div`
   color: rgb(249, 249, 249);
-  font-size: 15px;
+  font-size: 25px;
   min-height: 20px;
   margin-top: 26px;
 `;
